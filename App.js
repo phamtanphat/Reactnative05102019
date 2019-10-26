@@ -14,7 +14,7 @@ const arrayWords = [
 class App extends Component {
   render() {
     return (
-      <View style={{flex: 1}}>
+      <View style={{flex: 1, backgroundColor: 'lightgrey'}}>
         {arrayWords.map(function(word) {
           return <Word word={word} key={word.id} />;
         })}
