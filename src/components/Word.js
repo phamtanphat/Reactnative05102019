@@ -1,14 +1,15 @@
-import React, { Component } from 'react'
-import { Text, View } from 'react-native'
+import React, {Component} from 'react';;
+import {Text, View} from 'react-native';;
 
 export default class Word extends Component {
-    One Mot
-    Two Hai
-    render() {
-        return (
-            <View>
-                <Text> textInComponent </Text>
-            </View>
-        )
-    }
+  render() {
+    const en = this.props.word.en;
+    const vn = this.props.word.vn;
+    return (
+      <View style={{flexDirection: 'row'}}>
+        <Text> {en} </Text>
+        <Text> {vn} </Text>
+      </View>
+    );
+  }
 }
