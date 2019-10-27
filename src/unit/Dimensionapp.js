@@ -1,9 +1,14 @@
 import {Dimensions} from 'react-native';
 class Dimensionapp {
   static getWidth() {
-    return Dimensions.get('window').width;;
+    return Dimensions.get('window').width;
   }
   static getHeight() {
-    return Dimensions.get('window').height;;
+    return Dimensions.get('window').height;
   }
 }
+
+// const Dimensionapp1 = {
+//   width: Dimensions.get('window').width,
+//   height: Dimensions.get('window').height,
+// };
