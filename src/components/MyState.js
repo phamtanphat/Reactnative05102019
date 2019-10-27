@@ -9,7 +9,16 @@ export default class MyState extends Component {
       count: 1,
     };
   }
-  render() {    
+  inCrease() {
+    this.setState({count: this.state.count + 1});
+  }
+  deCrease() {
+    this.setState({count: this.state.count - 1});
+  }
+  reset() {
+    this.setState({count: 0});
+  }
+  render() {
     return (
       <View
         style={{
@@ -18,7 +27,9 @@ export default class MyState extends Component {
           justifyContent: 'center',
           alignItems: 'center',
         }}>
-        <Text style={{color: 'red', fontSize: 40}}>Count : {this.state.count}</Text>
+        <Text style={{color: 'red', fontSize: 40}}>
+          Count : {this.state.count}
+        </Text>
         <View
           style={{
             width: '100%',
@@ -28,21 +39,31 @@ export default class MyState extends Component {
           <TouchableOpacity
             style={{backgroundColor: 'green', padding: 10}}
             onPress={function() {
-              count++;
-              alert(count);
-            }}>
+              this.inCrease();
+            }.bind(this)}>
+            {/* onPress={() => {
+              this.setState({count: this.state.count + 1});
+            }}> */}
             <Text
               style={{color: 'white', fontStyle: 'italic', fontWeight: 'bold'}}>
               Increase
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity style={{backgroundColor: 'red', padding: 10}}>
+          <TouchableOpacity
+            onPress={function() {
+              this.deCrease();
+            }.bind(this)}
+            style={{backgroundColor: 'red', padding: 10}}>
             <Text
               style={{color: 'white', fontStyle: 'italic', fontWeight: 'bold'}}>
               Decrease
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity style={{backgroundColor: 'slategray', padding: 10}}>
+          <TouchableOpacity
+            onPress={function() {
+              this.reset();
+            }.bind(this)}
+            style={{backgroundColor: 'slategray', padding: 10}}>
             <Text
               style={{color: 'white', fontStyle: 'italic', fontWeight: 'bold'}}>
               Reset
