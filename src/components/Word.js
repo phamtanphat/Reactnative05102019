@@ -21,7 +21,7 @@ export default class Word extends Component {
         <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
           <Text style={{fontSize: width / 15, color: '#28a745'}}> {en} </Text>
           <Text style={{fontSize: width / 15, color: 'red'}}>
-            {isMemorized ? vn : '----'}
+            {isMemorized ? '----' : vn}
           </Text>
         </View>
         <View
@@ -31,7 +31,7 @@ export default class Word extends Component {
             marginTop: width / 30,
           }}>
           <TouchableOpacity>
-            <Text>Forgot</Text>
+            <Text>{isMemorized ? 'Forgot' : 'isMemorized'}</Text>
           </TouchableOpacity>
           <TouchableOpacity>
             <Text>Remove</Text>
