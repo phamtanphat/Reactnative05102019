@@ -2,6 +2,7 @@
 import React, {Component} from 'react';
 import {View, Text, SafeAreaView} from 'react-native';
 import Word from './src/components/Word';
+import MyState from './src/components/MyState';
 // import MyProps from './src/components/MyProps';
 
 const arrayWords = [
@@ -15,11 +16,12 @@ class App extends Component {
   render() {
     return (
       <SafeAreaView style={{flex: 1}}>
-        <View style={{flex: 1, backgroundColor: 'lightgrey'}}>
+        {/* <View style={{flex: 1, backgroundColor: 'lightgrey'}}>
           {arrayWords.map(function(word) {
             return <Word word={word} key={word.id} />;
           })}
-        </View>
+        </View> */}
+        <MyState />
       </SafeAreaView>
     );
   }
