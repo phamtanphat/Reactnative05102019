@@ -9,6 +9,15 @@ import {
 } from 'react-native';
 
 export default class Form extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      en: null,
+      vn: null,
+      words: [],
+      countId: 0,
+    };
+  }
   render() {
     return (
       <KeyboardAvoidingView behavior="padding" style={{flex: 1}}>
@@ -22,6 +31,10 @@ export default class Form extends Component {
             paddingHorizontal: 20,
           }}
           placeholder="English"
+          value={this.state.en}
+          onChangeText={function(text) {
+            this.setState({en: text});
+          }.bind(this)}
         />
         <TextInput
           style={{
@@ -33,6 +46,10 @@ export default class Form extends Component {
             paddingHorizontal: 20,
           }}
           placeholder="Vietnamese"
+          value={this.state.vn}
+          onChangeText={function(text) {
+            this.setState({vn: text});
+          }.bind(this)}
         />
         <View
           style={{
@@ -41,6 +58,20 @@ export default class Form extends Component {
             marginTop: 20,
           }}>
           <TouchableOpacity
+            onPress={() => {
+              const {countId, en, vn} = this.state;
+              const newWord = {
+                id: countId,
+                en,
+                vn,
+              };
+              this.state.words.push(newWord);
+
+              this.setState({
+                words: this.state.words,
+                countId: this.state.countId + 1,
+              });
+            }}
             style={{backgroundColor: '#28a745', padding: 15, borderRadius: 8}}>
             <Text style={{fontSize: 20, fontWeight: 'bold', color: 'white'}}>
               Add word
@@ -53,7 +84,9 @@ export default class Form extends Component {
             </Text>
           </TouchableOpacity>
         </View>
-        <Text style={{fontSize: 20}}>Word : </Text>
+        <Text style={{fontSize: 20}}>
+          Word : {JSON.stringify(this.state.words)}
+        </Text>
       </KeyboardAvoidingView>
     );
   }
