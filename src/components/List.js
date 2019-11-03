@@ -1,6 +1,14 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
-import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
+import {
+  Text,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  KeyboardAvoidingView,
+  TextInput,
+  ScrollView,
+} from 'react-native';
 import {Dimensionapp} from '../unit/Dimensionapp';
 
 export default class List extends Component {
@@ -27,7 +35,9 @@ export default class List extends Component {
   }
   removeWord(id) {
     const newArray = this.state.words.filter(item => {
-      if (item.id === id) return false;
+      if (item.id === id) {
+        return false;
+      }
       return true;
     });
     this.setState({words: newArray});
@@ -63,9 +73,101 @@ export default class List extends Component {
   }
   render() {
     return (
-      <View style={{flex: 1, backgroundColor: 'lightgrey'}}>
-        {this.state.words.map(item => this.renderItemWord(item))}
-      </View>
+      <ScrollView style={{flex: 1}}>
+        <View style={{flex: 1, backgroundColor: 'lightgrey'}}>
+          <View
+            style={{
+              flex: 1,
+              position: 'relative',
+            }}>
+            <KeyboardAvoidingView
+              behavior="padding"
+              style={{
+                borderColor: 'white',
+                borderRadius: Dimensionapp.getWidth() / 100,
+                backgroundColor: 'white',
+                margin: Dimensionapp.getWidth() / 70,
+                padding: Dimensionapp.getWidth() / 90,
+              }}>
+              <TextInput
+                style={{
+                  height: 50,
+                  borderColor: 'black',
+                  borderWidth: 1,
+                  margin: 10,
+                  fontSize: 20,
+                  paddingHorizontal: 20,
+                }}
+                placeholder="English"
+                value={this.state.en}
+                onChangeText={function(text) {
+                  this.setState({en: text});
+                }.bind(this)}
+              />
+              <TextInput
+                style={{
+                  height: 50,
+                  borderColor: 'black',
+                  borderWidth: 1,
+                  margin: 10,
+                  fontSize: 20,
+                  paddingHorizontal: 20,
+                }}
+                placeholder="Vietnamese"
+                value={this.state.vn}
+                onChangeText={function(text) {
+                  this.setState({vn: text});
+                }.bind(this)}
+              />
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'space-around',
+                  marginTop: 20,
+                  marginBottom: 20,
+                }}>
+                <TouchableOpacity
+                  onPress={() => {
+                    const {countId, en, vn} = this.state;
+                    const newWord = {
+                      id: countId,
+                      en,
+                      vn,
+                    };
+                    this.state.words.push(newWord);
+
+                    this.setState({
+                      words: this.state.words,
+                      countId: this.state.countId + 1,
+                    });
+                  }}
+                  style={{
+                    backgroundColor: '#28a745',
+                    padding: 15,
+                    borderRadius: 8,
+                  }}>
+                  <Text
+                    style={{fontSize: 20, fontWeight: 'bold', color: 'white'}}>
+                    Add word
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={{
+                    backgroundColor: 'red',
+                    padding: 15,
+                    borderRadius: 8,
+                  }}>
+                  <Text
+                    style={{fontSize: 20, fontWeight: 'bold', color: 'white'}}>
+                    Cancel
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </KeyboardAvoidingView>
+            {this.state.words.map(item => this.renderItemWord(item))}
+          </View>
+        </View>
+      </ScrollView>
     );
   }
 }
@@ -79,6 +181,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     margin: Dimensionapp.getWidth() / 70,
     justifyContent: 'center',
+    position: 'relative',
   },
   groupText: {
     flexDirection: 'row',
