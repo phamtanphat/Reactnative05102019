@@ -32,38 +32,39 @@ export default class List extends Component {
     });
     this.setState({words: newArray});
   }
+  renderItemWord(item) {
+    const {en, vn, isMemorized, id} = item;
+    return (
+      <View style={styles.container} key={item.id}>
+        <View style={styles.groupText}>
+          <Text style={styles.textEn}>{en}</Text>
+          <Text style={styles.textVn}>{isMemorized ? '----' : vn}</Text>
+        </View>
+        <View style={styles.groupButton}>
+          <TouchableOpacity
+            onPress={() => this.toggleMemorized(id)}
+            style={{
+              ...styles.touchableMemorized,
+              backgroundColor: isMemorized ? '#28a745' : 'red',
+              marginLeft: isMemorized ? Dimensionapp.getWidth() / 20 : 0,
+            }}>
+            <Text style={styles.textMemorized}>
+              {isMemorized ? 'Forgot' : 'isMemorized'}
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => this.removeWord(id)}
+            style={styles.touchableRemove}>
+            <Text style={styles.textRemove}>Remove</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+  }
   render() {
     return (
       <View style={{flex: 1, backgroundColor: 'lightgrey'}}>
-        {this.state.words.map(item => {
-          const {en, vn, isMemorized, id} = item;
-          return (
-            <View style={styles.container} key={item.id}>
-              <View style={styles.groupText}>
-                <Text style={styles.textEn}>{en}</Text>
-                <Text style={styles.textVn}>{isMemorized ? '----' : vn}</Text>
-              </View>
-              <View style={styles.groupButton}>
-                <TouchableOpacity
-                  onPress={() => this.toggleMemorized(id)}
-                  style={{
-                    ...styles.touchableMemorized,
-                    backgroundColor: isMemorized ? '#28a745' : 'red',
-                    marginLeft: isMemorized ? Dimensionapp.getWidth() / 20 : 0,
-                  }}>
-                  <Text style={styles.textMemorized}>
-                    {isMemorized ? 'Forgot' : 'isMemorized'}
-                  </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={() => this.removeWord(id)}
-                  style={styles.touchableRemove}>
-                  <Text style={styles.textRemove}>Remove</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-          );
-        })}
+        {this.state.words.map(item => this.renderItemWord(item))}
       </View>
     );
   }
