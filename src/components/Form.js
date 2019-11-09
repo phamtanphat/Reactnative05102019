@@ -7,87 +7,103 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import {Dimensionapp} from '../unit/Dimensionapp';
+import {thisExpression} from '@babel/types';
 
 export default class Form extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      en: null,
-      vn: null,
-      words: [],
-      countId: 0,
+      txtEn: '',
+      txtVn: '',
     };
   }
-  render() {
-    return (
-      <KeyboardAvoidingView behavior="padding" style={{flex: 1}}>
-        <TextInput
-          style={{
-            height: 50,
-            borderColor: 'black',
-            borderWidth: 1,
-            margin: 10,
-            fontSize: 20,
-            paddingHorizontal: 20,
-          }}
-          placeholder="English"
-          value={this.state.en}
-          onChangeText={function(text) {
-            this.setState({en: text});
-          }.bind(this)}
-        />
-        <TextInput
-          style={{
-            height: 50,
-            borderColor: 'black',
-            borderWidth: 1,
-            margin: 10,
-            fontSize: 20,
-            paddingHorizontal: 20,
-          }}
-          placeholder="Vietnamese"
-          value={this.state.vn}
-          onChangeText={function(text) {
-            this.setState({vn: text});
-          }.bind(this)}
-        />
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-around',
-            marginTop: 20,
-          }}>
-          <TouchableOpacity
-            onPress={() => {
-              const {countId, en, vn} = this.state;
-              const newWord = {
-                id: countId,
-                en,
-                vn,
-              };
-              this.state.words.push(newWord);
-
-              this.setState({
-                words: this.state.words,
-                countId: this.state.countId + 1,
-              });
+  renderForm() {
+    const {shouldShowForm} = this.props;
+    if (shouldShowForm) {
+      return (
+        <KeyboardAvoidingView behavior="padding">
+          <TextInput
+            style={{
+              height: 50,
+              borderColor: 'black',
+              borderWidth: 1,
+              margin: 10,
+              fontSize: 20,
+              paddingHorizontal: 20,
             }}
-            style={{backgroundColor: '#28a745', padding: 15, borderRadius: 8}}>
-            <Text style={{fontSize: 20, fontWeight: 'bold', color: 'white'}}>
-              Add word
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={{backgroundColor: 'red', padding: 15, borderRadius: 8}}>
-            <Text style={{fontSize: 20, fontWeight: 'bold', color: 'white'}}>
-              Cancel
-            </Text>
-          </TouchableOpacity>
-        </View>
-        <Text style={{fontSize: 20}}>
-          Word : {JSON.stringify(this.state.words)}
-        </Text>
-      </KeyboardAvoidingView>
-    );
+            placeholder="English"
+            value={this.state.txtEn}
+            onChangeText={function(text) {
+              this.setState({txtEn: text});
+            }.bind(this)}
+          />
+          <TextInput
+            style={{
+              height: 50,
+              borderColor: 'black',
+              borderWidth: 1,
+              margin: 10,
+              fontSize: 20,
+              paddingHorizontal: 20,
+            }}
+            placeholder="Vietnamese"
+            value={this.state.txtVn}
+            onChangeText={function(text) {
+              this.setState({txtVn: text});
+            }.bind(this)}
+          />
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-around',
+              marginTop: 20,
+            }}>
+            <TouchableOpacity
+              style={{
+                backgroundColor: '#28a745',
+                padding: 15,
+                borderRadius: 8,
+              }}>
+              <Text style={{fontSize: 20, fontWeight: 'bold', color: 'white'}}>
+                Add word
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{
+                backgroundColor: 'red',
+                padding: 15,
+                borderRadius: 8,
+              }}>
+              <Text style={{fontSize: 20, fontWeight: 'bold', color: 'white'}}>
+                Cancel
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </KeyboardAvoidingView>
+      );
+    } else {
+      return (
+        <TouchableOpacity
+          onPress={() => this.toggleForm()}
+          style={{
+            paddingVertical: Dimensionapp.getWidth() / 30,
+            backgroundColor: '#28a745',
+            alignItems: 'center',
+            borderRadius: Dimensionapp.getWidth() / 100,
+          }}>
+          <Text
+            style={{
+              color: 'white',
+              fontSize: Dimensionapp.getWidth() / 15,
+            }}>
+            +
+          </Text>
+        </TouchableOpacity>
+      );
+    }
+  }
+  render() {
+    return <View>{this.renderForm()}</View>;
   }
 }
