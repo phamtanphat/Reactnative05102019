@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
-import {Text, View} from 'react-native';
+import {View} from 'react-native';
 import {Dropdown} from 'react-native-material-dropdown';
 import {Dimensionapp} from '../unit/Dimensionapp';
 
@@ -10,7 +10,6 @@ export default class Filter extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      filterMode: 'Show_All',
       filters: [
         {value: 'Show_All'},
         {value: 'Show_Forgot'},
@@ -19,6 +18,7 @@ export default class Filter extends Component {
     };
   }
   render() {
+    const { onSetFilterMode } = this.props; 
     return (
       <View
         style={{
@@ -39,9 +39,7 @@ export default class Filter extends Component {
           }}
           inputContainerStyle={{borderBottomColor: 'transparent'}}
           dropdownOffset={{top: Dimensionapp.getWidth() * 0.01, left: 0}}
-          onChangeText={text => {
-            this.setState({filterMode: text});
-          }}
+          onChangeText={text => onSetFilterMode(text)}
           value={this.props.filterMode}
         />
       </View>

@@ -8,7 +8,7 @@ import {
   TextInput,
   ScrollView,
 } from 'react-native';
-import {Dimensionapp ,Orientation} from '../unit/Dimensionapp';
+import {Dimensionapp, Orientation} from '../unit/Dimensionapp';
 import Word from './Word';
 import Filter from './Filter';
 import Form from './Form';
@@ -27,8 +27,13 @@ export default class List extends Component {
       shouldShowForm: false,
       filterMode: 'Show_All',
     };
+    this.onToggleMemorized = this.onToggleMemorized.bind(this);
+    this.onRemoveWord = this.onRemoveWord.bind(this);
+    this.onAddWord = this.onAddWord.bind(this);
+    this.onToggleForm = this.onToggleForm.bind(this);
+    this.onSetFilterMode = this.onSetFilterMode.bind(this);
   }
-  toggleMemorized(id) {
+  onToggleMemorized(id) {
     const newArray = this.state.words.map(item => {
       if (id !== item.id) {
         return item;
@@ -37,7 +42,7 @@ export default class List extends Component {
     });
     this.setState({words: newArray});
   }
-  removeWord(id) {
+  onRemoveWord(id) {
     const newArray = this.state.words.filter(item => {
       if (item.id === id) {
         return false;
@@ -49,23 +54,16 @@ export default class List extends Component {
   jsonCopy(src) {
     return JSON.parse(JSON.stringify(src));
   }
-  addWord() {
-    const {txtEn, txtVn} = this.state;
-    if (txtEn.length <= 0 || txtVn.length <= 0) {
-      return alert('Ban chua nhap du thong tin');
-    }
-    const newWord = {
-      id: Math.random(),
-      en: txtEn,
-      vn: txtVn,
-      isMemorized: false,
-    };
+  onAddWord(newWord) {
     const newArray = this.jsonCopy(this.state.words);
     newArray.unshift(newWord);
-    this.setState({words: newArray, txtEn: '', txtVn: ''});
+    this.setState({words: newArray});
   }
-  toggleForm() {
+  onToggleForm() {
     this.setState({shouldShowForm: !this.state.shouldShowForm});
+  }
+  onSetFilterMode(filterMode) {
+    this.setState({filterMode});
   }
   filteredWord = () => {
     return this.state.words.filter(item => {
@@ -94,14 +92,35 @@ export default class List extends Component {
               margin: Dimensionapp.getWidth() / 70,
               padding: Dimensionapp.getWidth() / 90,
             }}>
-            <Form shouldShowForm={this.state.shouldShowForm} />
+            <Form
+              onToggleForm={this.onToggleForm}
+              onAddWord={this.onAddWord}
+              shouldShowForm={this.state.shouldShowForm}
+            />
           </View>
-          <Filter filterMode={this.state.filterMode} />
+          <Filter
+            onSetFilterMode={this.onSetFilterMode}
+            filterMode={this.state.filterMode}
+          />
           {this.filteredWord().map(item => (
-            <Word word={item} />
+            <Word
+              word={item}
+              onToggleMemorized={this.onToggleMemorized}
+              onRemoveWord={this.onRemoveWord}
+            />
           ))}
         </View>
       </ScrollView>
     );
   }
 }
+
+// store = {
+//   name : 'phat',
+//   age : 26,
+// }
+// {action : 'Change Name', name : newValue}
+
+// Component A : (database : store)
+
+// Component B : (database : store)

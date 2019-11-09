@@ -5,7 +5,8 @@ import {Dimensionapp} from '../unit/Dimensionapp';
 
 export default class Word extends Component {
   render() {
-    const {en, vn, isMemorized} = this.props.word;
+    const {en, vn, isMemorized, id} = this.props.word;
+    const {onToggleMemorized,onRemoveWord} = this.props;
     return (
       <View style={styles.container}>
         <View style={styles.groupText}>
@@ -14,6 +15,7 @@ export default class Word extends Component {
         </View>
         <View style={styles.groupButton}>
           <TouchableOpacity
+            onPress={() => onToggleMemorized(id)}
             style={{
               ...styles.touchableMemorized,
               backgroundColor: isMemorized ? '#28a745' : 'red',
@@ -23,7 +25,9 @@ export default class Word extends Component {
               {isMemorized ? 'Forgot' : 'isMemorized'}
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.touchableRemove}>
+          <TouchableOpacity 
+            onPress={() => onRemoveWord(id)}
+            style={styles.touchableRemove}>
             <Text style={styles.textRemove}>Remove</Text>
           </TouchableOpacity>
         </View>

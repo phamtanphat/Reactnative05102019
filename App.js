@@ -14,10 +14,10 @@ class App extends Component {
   render() {
     return (
       <SafeAreaView style={{flex: 1}}>
-        {/* <List /> */}
+        <List />
         {/* <Form /> */}
         {/* <Filter /> */}
-        <MyState />
+        {/* <MyState /> */}
       </SafeAreaView>
     );
   }
