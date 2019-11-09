@@ -1,6 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
-import {Text, View, TouchableOpacity} from 'react-native';
+import {Text, View} from 'react-native';
+import Myfunction from './Myfunction';
 
 export default class MyState extends Component {
   constructor(props) {
@@ -30,46 +31,7 @@ export default class MyState extends Component {
         <Text style={{color: 'red', fontSize: 40}}>
           Count : {this.state.count}
         </Text>
-        <View
-          style={{
-            width: '100%',
-            flexDirection: 'row',
-            justifyContent: 'space-evenly',
-          }}>
-          <TouchableOpacity
-            style={{backgroundColor: 'green', padding: 10}}
-            onPress={function() {
-              this.inCrease();
-            }.bind(this)}>
-            {/* onPress={() => {
-              this.setState({count: this.state.count + 1});
-            }}> */}
-            <Text
-              style={{color: 'white', fontStyle: 'italic', fontWeight: 'bold'}}>
-              Increase
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={function() {
-              this.deCrease();
-            }.bind(this)}
-            style={{backgroundColor: 'red', padding: 10}}>
-            <Text
-              style={{color: 'white', fontStyle: 'italic', fontWeight: 'bold'}}>
-              Decrease
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={function() {
-              this.reset();
-            }.bind(this)}
-            style={{backgroundColor: 'slategray', padding: 10}}>
-            <Text
-              style={{color: 'white', fontStyle: 'italic', fontWeight: 'bold'}}>
-              Reset
-            </Text>
-          </TouchableOpacity>
-        </View>
+        <Myfunction />
       </View>
     );
   }
