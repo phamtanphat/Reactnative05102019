@@ -5,24 +5,6 @@ import Myfunction from './Myfunction';
 import {connect} from 'react-redux';
 
 class MyState extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      count: 1,
-    };
-    this.onInCrease = this.onInCrease.bind(this);
-    this.onDeCrease = this.onDeCrease.bind(this);
-    this.onReset = this.onReset.bind(this);
-  }
-  onInCrease() {
-    this.setState({count: this.state.count + 1});
-  }
-  onDeCrease() {
-    this.setState({count: this.state.count - 1});
-  }
-  onReset() {
-    this.setState({count: 0});
-  }
   render() {
     return (
       <View
@@ -35,11 +17,7 @@ class MyState extends Component {
         <Text style={{color: 'red', fontSize: 40}}>
           Count : {this.props.count}
         </Text>
-        <Myfunction
-          onDeCrease={this.onDeCrease}
-          onReset={this.onReset}
-          onInCrease={this.onInCrease}
-        />
+        <Myfunction />
       </View>
     );
   }

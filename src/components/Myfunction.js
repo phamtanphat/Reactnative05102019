@@ -1,8 +1,9 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
 import {Text, View, TouchableOpacity} from 'react-native';
+import {connect} from 'react-redux';
 
-export default class Myfunction extends Component {
+class Myfunction extends Component {
   render() {
     return (
       <View
@@ -12,7 +13,7 @@ export default class Myfunction extends Component {
           justifyContent: 'space-evenly',
         }}>
         <TouchableOpacity
-          onPress={() => this.props.onInCrease()}
+          onPress={() => this.props.dispatch({type: 'INCREASE'})}
           style={{backgroundColor: 'green', padding: 10}}>
           <Text
             style={{color: 'white', fontStyle: 'italic', fontWeight: 'bold'}}>
@@ -20,7 +21,7 @@ export default class Myfunction extends Component {
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => this.props.onDeCrease()}
+          onPress={() => this.props.dispatch({type: 'DECREASE'})}
           style={{backgroundColor: 'red', padding: 10}}>
           <Text
             style={{color: 'white', fontStyle: 'italic', fontWeight: 'bold'}}>
@@ -28,7 +29,7 @@ export default class Myfunction extends Component {
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => this.props.onReset()}
+          onPress={() => this.props.dispatch({type: 'RESET'})}
           style={{backgroundColor: 'slategray', padding: 10}}>
           <Text
             style={{color: 'white', fontStyle: 'italic', fontWeight: 'bold'}}>
@@ -39,3 +40,4 @@ export default class Myfunction extends Component {
     );
   }
 }
+export default connect()(Myfunction);
