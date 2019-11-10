@@ -8,8 +8,9 @@ import {
   View,
 } from 'react-native';
 import {Dimensionapp} from '../unit/Dimensionapp';
+import {connect} from 'react-redux';
 
-export default class Form extends Component {
+class Form extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -33,7 +34,7 @@ export default class Form extends Component {
     this.setState({txtEn: '', txtVn: ''});
   };
   renderForm() {
-    const {shouldShowForm , onToggleForm} = this.props;
+    const {shouldShowForm} = this.props;
     if (shouldShowForm) {
       return (
         <KeyboardAvoidingView behavior="padding">
@@ -74,7 +75,6 @@ export default class Form extends Component {
               marginTop: 20,
             }}>
             <TouchableOpacity
-              onPress={() => this.addWord()}
               style={{
                 backgroundColor: '#28a745',
                 padding: 15,
@@ -85,7 +85,6 @@ export default class Form extends Component {
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => onToggleForm()}
               style={{
                 backgroundColor: 'red',
                 padding: 15,
@@ -123,3 +122,10 @@ export default class Form extends Component {
     return <View>{this.renderForm()}</View>;
   }
 }
+const mapStateToProps = function(state) {
+  return {
+    shouldShowForm: state.shouldShowForm,
+  };
+};
+
+export default connect(mapStateToProps)(Form);
