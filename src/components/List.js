@@ -1,14 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
-import {
-  Text,
-  View,
-  TouchableOpacity,
-  KeyboardAvoidingView,
-  TextInput,
-  ScrollView,
-} from 'react-native';
-import {Dimensionapp, Orientation} from '../unit/Dimensionapp';
+import {View, ScrollView} from 'react-native';
+import {Dimensionapp} from '../unit/Dimensionapp';
 import Word from './Word';
 import Filter from './Filter';
 import Form from './Form';

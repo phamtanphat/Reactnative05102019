@@ -1,14 +1,29 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
 import {SafeAreaView} from 'react-native';
-import Word from './src/components/Word';
 import List from './src/components/List';
-import Form from './src/components/Form';
-import Filter from './src/components/Filter';
 import MyState from './src/components/MyState';
+import {createStore} from 'redux';
 
-// import MyState from './src/components/MyState';
-// import MyProps from './src/components/MyProps';
+// const defaultState = {
+//   count : 1,
+//   arrayNams : [
+//     "Phat","Hoa","Tuan"
+//   ]
+// }
+// 1 : Tao ra store (Noi chua du lieu cua app can chia se);
+// 2 : Dinh nghia ra cac action
+// 3 : Khi action thuc thi nho return ve store moi
+const store = createStore((state = 1, action) => {
+  if  (action.type === 'INCREASE') {return state + 1;}
+  return state;
+});
+
+console.log('Truoc khi thay doi store ' + store.getState());
+console.log(
+  'Thay doi store ' + JSON.stringify(store.dispatch({type: 'INCREASE'})),
+);
+console.log('Sau khi thay doi store ' + store.getState());
 
 class App extends Component {
   render() {
@@ -24,3 +39,8 @@ class App extends Component {
 }
 
 export default App;
+
+function tinhtong(a = 5, b = 5) {
+  return a + b;
+}
+tinhtong(5);
