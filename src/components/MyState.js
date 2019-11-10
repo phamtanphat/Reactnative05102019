@@ -2,8 +2,9 @@
 import React, {Component} from 'react';
 import {Text, View} from 'react-native';
 import Myfunction from './Myfunction';
+import {connect} from 'react-redux';
 
-export default class MyState extends Component {
+class MyState extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -32,13 +33,21 @@ export default class MyState extends Component {
           alignItems: 'center',
         }}>
         <Text style={{color: 'red', fontSize: 40}}>
-          Count : {this.state.count}
+          Count : {this.props.count}
         </Text>
         <Myfunction
           onDeCrease={this.onDeCrease}
           onReset={this.onReset}
-          onInCrease={this.onInCrease} />
+          onInCrease={this.onInCrease}
+        />
       </View>
     );
   }
 }
+const mapStateToProps = function(state) {
+  return {
+    count: state,
+  };
+};
+
+export default connect(mapStateToProps)(MyState);
