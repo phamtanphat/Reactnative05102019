@@ -27,33 +27,7 @@ import { combineReducers } from 'redux'
 //   };
 // export default connect(mapStateToProps)(MyState);
 // 4 : Khi co tham so thu 1 trong connect , cac ban lay lieu cua store thong props cua components
-// (state = defaultState, action) => {
-  // if (action.type === 'TOGGLE_WORD') {
-  //   const newWords = state.words.map(item => {
-  //     if (action.id === item.id) {
-  //       return {...item, isMemorized: !item.isMemorized};
-  //     }
-  //     return item;
-  //   });
-  //   return {...state, words: newWords};
-  // }
-//   if (action.type === 'REMOVE_WORD') {
-//     const newWords = state.words.filter(item => action.id !== item.id);
-//     return {...state, words: newWords};
-//   }
-//   if (action.type === 'TOGGLE_FORM') {
-//     return {...state, shouldShowForm: !state.shouldShowForm};
-//   }
-//   if (action.type === 'ADD_WORD') {
-//     const coppyWords = Object.assign([], state.words);
-//     coppyWords.unshift(action.word);
-//     return {...state, words: coppyWords};
-//   }
-//   if (action.type === 'SET_FILTER_MODE') {
-//     return {...state, filterMode: action.filterMode};
-//   }
-//   return state;
-// }
+
 const defaultWords = [
   {id: 'a1', en: 'One', vn: 'Mot', isMemorized: true},
   {id: 'a2', en: 'Two', vn: 'Hai', isMemorized: false},
@@ -72,12 +46,30 @@ function reducerWords(state = defaultWords, action) {
     });
     return newWords;
   }
+  if (action.type === 'REMOVE_WORD') {
+    const newWords = state.filter(item => action.id !== item.id);
+    return newWords;
+  }
+  if (action.type === 'ADD_WORD') {
+    const coppyWords = Object.assign([], state);
+    coppyWords.unshift(action.word);
+    return coppyWords;
+  }
   return state;
 }
 function reducershouldShowForm(state = false, action) {
+  if (action.type === 'TOGGLE_FORM') {
+    return !state;
+  }
+  if (action.type === 'ADD_WORD') {
+    return !state;
+  }
   return state;
 }
 function reducerfilterMode(state = 'Show_All', action) {
+  if (action.type === 'SET_FILTER_MODE') {
+    return action.filterMode;
+  }
   return state;
 }
 
