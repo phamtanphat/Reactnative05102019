@@ -52,6 +52,9 @@ const store = createStore((state = defaultState, action) => {
     const newWords = state.words.filter(item => action.id !== item.id);
     return {...state, words: newWords};
   }
+  if (action.type === 'TOGGLE_FORM') {
+    return {...state, shouldShowForm: !state.shouldShowForm};
+  }
   return state;
 });
 

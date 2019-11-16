@@ -85,6 +85,7 @@ class Form extends Component {
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
+              onPress={() => this.props.dispatch({type: 'TOGGLE_FORM'})}
               style={{
                 backgroundColor: 'red',
                 padding: 15,
@@ -100,7 +101,7 @@ class Form extends Component {
     } else {
       return (
         <TouchableOpacity
-          onPress={() => onToggleForm()}
+          onPress={() => this.props.dispatch({type: 'TOGGLE_FORM'})}
           style={{
             paddingVertical: Dimensionapp.getWidth() / 30,
             backgroundColor: '#28a745',
