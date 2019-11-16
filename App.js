@@ -60,6 +60,9 @@ const store = createStore((state = defaultState, action) => {
     coppyWords.unshift(action.word);
     return {...state, words: coppyWords};
   }
+  if (action.type === 'SET_FILTER_MODE') {
+    return {...state, filterMode: action.filterMode};
+  }
   return state;
 });
 
