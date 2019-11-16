@@ -2,7 +2,7 @@
 /* eslint-disable no-undef */
 /* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
-import {SafeAreaView} from 'react-native';
+import {SafeAreaView, Alert} from 'react-native';
 import List from './src/components/List';
 import MyState from './src/components/MyState';
 import {createStore} from 'redux';
@@ -57,14 +57,16 @@ const store = createStore((state = defaultState, action) => {
   }
   if (action.type === 'ADD_WORD') {
     const coppyWords = Object.assign([], state.words);
-    Alert.alert(
-      'Phan tu trong mang moi',
-      JSON.stringify(coppyWords),
-      [
-        {text: 'Ok' , onPress: () => console.log('Ban da chon ok')}
-      ]
-
-    );
+    Alert.alert('Phan tu trong mang moi', JSON.stringify(coppyWords), [
+      {text: 'Huy', onPress: () => console.log('Ban da chon huy')},
+      {
+        text: 'Cancel',
+        type: 'cancel',
+        onPress: () => console.log('Ban da chon cancel'),
+      },
+      {text: 'Ok', onPress: () => console.log('Ban da chon ok')},
+    ]);
+    return state;
   }
   return state;
 });
