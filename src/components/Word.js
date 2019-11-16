@@ -2,11 +2,11 @@
 import React, {Component} from 'react';
 import {Text, View, TouchableOpacity, StyleSheet} from 'react-native';
 import {Dimensionapp} from '../unit/Dimensionapp';
+import {connect} from 'react-redux';
 
-export default class Word extends Component {
+class Word extends Component {
   render() {
     const {en, vn, isMemorized, id} = this.props.word;
-    const {onToggleMemorized,onRemoveWord} = this.props;
     return (
       <View style={styles.container}>
         <View style={styles.groupText}>
@@ -15,7 +15,7 @@ export default class Word extends Component {
         </View>
         <View style={styles.groupButton}>
           <TouchableOpacity
-            onPress={() => onToggleMemorized(id)}
+            onPress={() => this.props.dispatch({type: 'TOGGLE_WORD', id})}
             style={{
               ...styles.touchableMemorized,
               backgroundColor: isMemorized ? '#28a745' : 'red',
@@ -25,8 +25,8 @@ export default class Word extends Component {
               {isMemorized ? 'Forgot' : 'isMemorized'}
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity 
-            onPress={() => onRemoveWord(id)}
+          <TouchableOpacity
+            onPress={() => this.props.dispatch({type: 'REMOVE_WORD', id})}
             style={styles.touchableRemove}>
             <Text style={styles.textRemove}>Remove</Text>
           </TouchableOpacity>
@@ -81,3 +81,5 @@ const styles = StyleSheet.create({
     fontSize: Dimensionapp.getWidth() / 20,
   },
 });
+
+export default connect()(Word);

@@ -48,6 +48,10 @@ const store = createStore((state = defaultState, action) => {
     });
     return {...state, words: newWords};
   }
+  if (action.type === 'REMOVE_WORD') {
+    const newWords = state.words.filter(item => action.id !== item.id);
+    return {...state, words: newWords};
+  }
   return state;
 });
 
