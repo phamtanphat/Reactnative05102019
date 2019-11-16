@@ -55,6 +55,17 @@ const store = createStore((state = defaultState, action) => {
   if (action.type === 'TOGGLE_FORM') {
     return {...state, shouldShowForm: !state.shouldShowForm};
   }
+  if (action.type === 'ADD_WORD') {
+    const coppyWords = Object.assign([], state.words);
+    Alert.alert(
+      'Phan tu trong mang moi',
+      JSON.stringify(coppyWords),
+      [
+        {text: 'Ok' , onPress: () => console.log('Ban da chon ok')}
+      ]
+
+    );
+  }
   return state;
 });
 
