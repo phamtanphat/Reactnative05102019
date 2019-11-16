@@ -57,16 +57,8 @@ const store = createStore((state = defaultState, action) => {
   }
   if (action.type === 'ADD_WORD') {
     const coppyWords = Object.assign([], state.words);
-    Alert.alert('Phan tu trong mang moi', JSON.stringify(coppyWords), [
-      {text: 'Huy', onPress: () => console.log('Ban da chon huy')},
-      {
-        text: 'Cancel',
-        type: 'cancel',
-        onPress: () => console.log('Ban da chon cancel'),
-      },
-      {text: 'Ok', onPress: () => console.log('Ban da chon ok')},
-    ]);
-    return state;
+    coppyWords.unshift(action.word);
+    return {...state, words: coppyWords};
   }
   return state;
 });

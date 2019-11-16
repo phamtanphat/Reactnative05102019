@@ -19,20 +19,18 @@ class Form extends Component {
     };
   }
   addWord = () => {
-    // const {txtEn, txtVn} = this.state;
-    // if (txtEn.length <= 0 || txtVn.length <= 0) {
-    //   return alert('Ban chua nhap du thong tin');
-    // }
-    // const newWord = {
-    //   id: Math.random(),
-    //   en: txtEn,
-    //   vn: txtVn,
-    //   isMemorized: false,
-    // };
-    // const {onAddWord} = this.props;
-    // onAddWord(newWord);
-    // this.setState({txtEn: '', txtVn: ''});
-    this.props.dispatch({type: 'ADD_WORD'});
+    const {txtEn, txtVn} = this.state;
+    if (txtEn.length <= 0 || txtVn.length <= 0) {
+      return alert('Ban chua nhap du thong tin');
+    }
+    const newWord = {
+      id: Math.random(),
+      en: txtEn,
+      vn: txtVn,
+      isMemorized: false,
+    };
+    this.props.dispatch({type: 'ADD_WORD', word: newWord});
+    this.setState({txtEn: '', txtVn: ''});
   };
   renderForm() {
     const {shouldShowForm} = this.props;
