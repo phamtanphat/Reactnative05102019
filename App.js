@@ -7,8 +7,7 @@ import List from './src/components/List';
 import MyState from './src/components/MyState';
 import {createStore} from 'redux';
 import {Provider} from 'react-redux';
-import { combineReducers } from 'redux';
-
+import { combineReducers } from 'redux'
 
 /* Create store */
 // 1 : Tao ra store (Noi chua du lieu cua app can chia se);
@@ -28,18 +27,33 @@ import { combineReducers } from 'redux';
 //   };
 // export default connect(mapStateToProps)(MyState);
 // 4 : Khi co tham so thu 1 trong connect , cac ban lay lieu cua store thong props cua components
-const defaultState = {
-  words: [
-    {id: 'a1', en: 'One', vn: 'Mot', isMemorized: true},
-    {id: 'a2', en: 'Two', vn: 'Hai', isMemorized: false},
-    {id: 'a3', en: 'Three', vn: 'Ba', isMemorized: false},
-    {id: 'a4', en: 'Four', vn: 'Bon', isMemorized: false},
-    {id: 'a5', en: 'Five', vn: 'Nam', isMemorized: true},
-  ],
-  shouldShowForm: false,
-  filterMode: 'Show_All',
-};
-
+// (state = defaultState, action) => {
+  // if (action.type === 'TOGGLE_WORD') {
+  //   const newWords = state.words.map(item => {
+  //     if (action.id === item.id) {
+  //       return {...item, isMemorized: !item.isMemorized};
+  //     }
+  //     return item;
+  //   });
+  //   return {...state, words: newWords};
+  // }
+//   if (action.type === 'REMOVE_WORD') {
+//     const newWords = state.words.filter(item => action.id !== item.id);
+//     return {...state, words: newWords};
+//   }
+//   if (action.type === 'TOGGLE_FORM') {
+//     return {...state, shouldShowForm: !state.shouldShowForm};
+//   }
+//   if (action.type === 'ADD_WORD') {
+//     const coppyWords = Object.assign([], state.words);
+//     coppyWords.unshift(action.word);
+//     return {...state, words: coppyWords};
+//   }
+//   if (action.type === 'SET_FILTER_MODE') {
+//     return {...state, filterMode: action.filterMode};
+//   }
+//   return state;
+// }
 const defaultWords = [
   {id: 'a1', en: 'One', vn: 'Mot', isMemorized: true},
   {id: 'a2', en: 'Two', vn: 'Hai', isMemorized: false},
@@ -49,6 +63,15 @@ const defaultWords = [
 ];
 
 function reducerWords(state = defaultWords, action) {
+  if (action.type === 'TOGGLE_WORD') {
+    const newWords = state.map(item => {
+      if (action.id === item.id) {
+        return {...item, isMemorized: !item.isMemorized};
+      }
+      return item;
+    });
+    return newWords;
+  }
   return state;
 }
 function reducershouldShowForm(state = false, action) {
