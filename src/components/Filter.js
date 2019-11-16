@@ -3,10 +3,11 @@ import React, {Component} from 'react';
 import {View} from 'react-native';
 import {Dropdown} from 'react-native-material-dropdown';
 import {Dimensionapp} from '../unit/Dimensionapp';
+import {connect} from 'react-redux';
 
 console.disableYellowBox = true;
 
-export default class Filter extends Component {
+class Filter extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -18,7 +19,6 @@ export default class Filter extends Component {
     };
   }
   render() {
-    const { onSetFilterMode } = this.props; 
     return (
       <View
         style={{
@@ -39,10 +39,16 @@ export default class Filter extends Component {
           }}
           inputContainerStyle={{borderBottomColor: 'transparent'}}
           dropdownOffset={{top: Dimensionapp.getWidth() * 0.01, left: 0}}
-          onChangeText={text => onSetFilterMode(text)}
           value={this.props.filterMode}
         />
       </View>
     );
   }
 }
+const mapStateToProps = function(state) {
+  return {
+    filterMode: state.filterMode,
+  };
+};
+
+export default connect(mapStateToProps)(Filter);

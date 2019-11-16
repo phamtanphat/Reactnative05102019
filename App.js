@@ -39,6 +39,15 @@ const defaultState = {
 };
 
 const store = createStore((state = defaultState, action) => {
+  if (action.type === 'TOGGLE_WORD') {
+    const newWords = state.words.map(item => {
+      if (action.id === item.id) {
+        return {...item, isMemorized: !item.isMemorized};
+      }
+      return item;
+    });
+    return {...state, words: newWords};
+  }
   return state;
 });
 
