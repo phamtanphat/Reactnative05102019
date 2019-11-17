@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import {Text, View, TouchableOpacity, StyleSheet} from 'react-native';
 import {Dimensionapp} from '../unit/Dimensionapp';
 import {connect} from 'react-redux';
+import * as actioncreatetor from '../redux/actioncreatetor.js';
 
 class Word extends Component {
   render() {
@@ -15,7 +16,7 @@ class Word extends Component {
         </View>
         <View style={styles.groupButton}>
           <TouchableOpacity
-            onPress={() => this.props.dispatch({type: 'TOGGLE_WORD', id})}
+            onPress={() => this.props.toggle_word(id)}
             style={{
               ...styles.touchableMemorized,
               backgroundColor: isMemorized ? '#28a745' : 'red',
@@ -82,4 +83,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect()(Word);
+export default connect(
+  null,
+  actioncreatetor,
+)(Word);
