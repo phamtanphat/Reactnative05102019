@@ -4,6 +4,7 @@ import {View} from 'react-native';
 import {Dropdown} from 'react-native-material-dropdown';
 import {Dimensionapp} from '../unit/Dimensionapp';
 import {connect} from 'react-redux';
+import * as actioncreatetor from '../redux/actioncreatetor.js';
 
 console.disableYellowBox = true;
 
@@ -40,9 +41,7 @@ class Filter extends Component {
           inputContainerStyle={{borderBottomColor: 'transparent'}}
           dropdownOffset={{top: Dimensionapp.getWidth() * 0.01, left: 0}}
           value={this.props.filterMode}
-          onChangeText={text =>
-            this.props.dispatch({type: 'SET_FILTER_MODE', filterMode: text})
-          }
+          onChangeText={this.props.setfilter_mode}
         />
       </View>
     );
@@ -54,4 +53,7 @@ const mapStateToProps = function(state) {
   };
 };
 
-export default connect(mapStateToProps)(Filter);
+export default connect(
+  mapStateToProps,
+  actioncreatetor,
+)(Filter);

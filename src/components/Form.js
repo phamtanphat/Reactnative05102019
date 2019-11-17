@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import {Dimensionapp} from '../unit/Dimensionapp';
 import {connect} from 'react-redux';
-
+import * as actioncreatetor from '../redux/actioncreatetor.js';
 class Form extends Component {
   constructor(props) {
     super(props);
@@ -29,7 +29,7 @@ class Form extends Component {
       vn: txtVn,
       isMemorized: false,
     };
-    this.props.dispatch({type: 'ADD_WORD', word: newWord});
+    this.props.add_word({type: 'ADD_WORD', word: newWord});
     this.setState({txtEn: '', txtVn: ''});
   };
   renderForm() {
@@ -85,7 +85,7 @@ class Form extends Component {
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => this.props.dispatch({type: 'TOGGLE_FORM'})}
+              onPress={this.props.toggle_form}
               style={{
                 backgroundColor: 'red',
                 padding: 15,
@@ -101,7 +101,7 @@ class Form extends Component {
     } else {
       return (
         <TouchableOpacity
-          onPress={() => this.props.dispatch({type: 'TOGGLE_FORM'})}
+          onPress={this.props.toggle_form}
           style={{
             paddingVertical: Dimensionapp.getWidth() / 30,
             backgroundColor: '#28a745',
@@ -129,4 +129,4 @@ const mapStateToProps = function(state) {
   };
 };
 
-export default connect(mapStateToProps)(Form);
+export default connect(mapStateToProps,actioncreatetor)(Form);
