@@ -7,7 +7,7 @@ import * as actioncreatetor from '../redux/actioncreatetor.js';
 
 class Word extends Component {
   render() {
-    const {en, vn, isMemorized, id} = this.props.word;
+    const {en, vn, isMemorized, _id} = this.props.word;
     return (
       <View style={styles.container}>
         <View style={styles.groupText}>
@@ -16,7 +16,7 @@ class Word extends Component {
         </View>
         <View style={styles.groupButton}>
           <TouchableOpacity
-            onPress={() => this.props.toggle_word(id)}
+            onPress={() => this.props.toggle_word(_id, isMemorized)}
             style={{
               ...styles.touchableMemorized,
               backgroundColor: isMemorized ? '#28a745' : 'red',
