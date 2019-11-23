@@ -1,12 +1,7 @@
-const defaultWords = [
-  {id: 'a1', en: 'One', vn: 'Mot', isMemorized: true},
-  {id: 'a2', en: 'Two', vn: 'Hai', isMemorized: false},
-  {id: 'a3', en: 'Three', vn: 'Ba', isMemorized: false},
-  {id: 'a4', en: 'Four', vn: 'Bon', isMemorized: false},
-  {id: 'a5', en: 'Five', vn: 'Nam', isMemorized: true},
-];
-
-export default function reducerWords(state = defaultWords, action) {
+export default function reducerWords(state = [], action) {
+  if (action.type === 'GET_ALL_WORD') {
+    return action.words;
+  }
   if (action.type === 'TOGGLE_WORD') {
     const newWords = state.map(item => {
       if (action.id === item.id) {
@@ -27,4 +22,3 @@ export default function reducerWords(state = defaultWords, action) {
   }
   return state;
 }
-

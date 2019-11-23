@@ -21,7 +21,7 @@ export function getAllWords() {
   return function(dispatch) {
     fetch(URL)
       .then(reponse => reponse.json())
-      .then(value => console.log(value.words))
+      .then(value => dispatch({type: 'GET_ALL_WORD', words: value.words}))
       .catch(error => alert(error));
   };
 }
