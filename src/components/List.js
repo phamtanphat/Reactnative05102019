@@ -6,8 +6,12 @@ import Word from './Word';
 import Filter from './Filter';
 import Form from './Form';
 import {connect} from 'react-redux';
-
+import * as actioncreatetor from '../redux/actioncreatetor.js';
 class List extends Component {
+  componentDidMount() {
+    this.props.getAllWords();
+  }
+
   filteredWord = () => {
     return this.props.words.filter(item => {
       if (this.props.filterMode === 'Show_All') {
@@ -53,4 +57,4 @@ const mapStateToProps = function(state) {
   };
 };
 
-export default connect(mapStateToProps)(List);
+export default connect(mapStateToProps, actioncreatetor)(List);
