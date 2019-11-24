@@ -7,6 +7,7 @@ import List from './src/components/List';
 import {Provider} from 'react-redux';
 import store from './src/redux/store';
 import Myvectoricon from './src/components/Myvectoricon';
+import MyCameraGallery from './src/components/MyCameraGallery';
 
 class App extends Component {
   render() {
@@ -15,7 +16,8 @@ class App extends Component {
         {/* <Provider store={store}>
           <List />
         </Provider> */}
-        <Myvectoricon />
+        {/* <Myvectoricon /> */}
+        <MyCameraGallery />
       </SafeAreaView>
     );
   }
