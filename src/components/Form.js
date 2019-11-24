@@ -23,13 +23,7 @@ class Form extends Component {
     if (txtEn.length <= 0 || txtVn.length <= 0) {
       return alert('Ban chua nhap du thong tin');
     }
-    const newWord = {
-      id: Math.random(),
-      en: txtEn,
-      vn: txtVn,
-      isMemorized: false,
-    };
-    this.props.add_word({type: 'ADD_WORD', word: newWord});
+    this.props.add_word(txtEn,txtVn);
     this.setState({txtEn: '', txtVn: ''});
   };
   renderForm() {

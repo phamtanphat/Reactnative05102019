@@ -5,14 +5,14 @@ export default function reducerWords(state = [], action) {
   if (action.type === 'TOGGLE_WORD') {
     const newWords = state.map(item => {
       if (action._id === item._id) {
-        return action.word;
+        return {...item, isMemorized: !item.isMemorized};
       }
       return item;
     });
     return newWords;
   }
   if (action.type === 'REMOVE_WORD') {
-    const newWords = state.filter(item => action.id !== item.id);
+    const newWords = state.filter(item => action._id !== item._id);
     return newWords;
   }
   if (action.type === 'ADD_WORD') {

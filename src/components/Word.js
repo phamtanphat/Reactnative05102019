@@ -16,7 +16,7 @@ class Word extends Component {
         </View>
         <View style={styles.groupButton}>
           <TouchableOpacity
-            onPress={() => this.props.toggle_word(_id, isMemorized)}
+            onPress={() => this.props.toggle_word(_id, !isMemorized)}
             style={{
               ...styles.touchableMemorized,
               backgroundColor: isMemorized ? '#28a745' : 'red',
@@ -27,7 +27,7 @@ class Word extends Component {
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => this.props.remove_word(id)}
+            onPress={() => this.props.remove_word(_id)}
             style={styles.touchableRemove}>
             <Text style={styles.textRemove}>Remove</Text>
           </TouchableOpacity>
