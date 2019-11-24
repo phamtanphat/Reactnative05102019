@@ -6,14 +6,16 @@ import {SafeAreaView} from 'react-native';
 import List from './src/components/List';
 import {Provider} from 'react-redux';
 import store from './src/redux/store';
+import Myvectoricon from './src/components/Myvectoricon';
 
 class App extends Component {
   render() {
     return (
       <SafeAreaView style={{flex: 1}}>
-        <Provider store={store}>
+        {/* <Provider store={store}>
           <List />
-        </Provider>
+        </Provider> */}
+        <Myvectoricon />
       </SafeAreaView>
     );
   }
